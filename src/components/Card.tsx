@@ -1,15 +1,16 @@
 import React, {useState, useEffect, SetStateAction} from 'react';
 import { TypeElement } from 'typescript';
+import {CARD_HEIGHT, CARD_WIDTH} from '../constants';
 
 interface CardProps {
     name: string;
-    width?: number;
-    height?: number;
+    width?: string;
+    height?: string;
 }
 
 type StateSrc = string | null;
 
-const Card: React.FC<CardProps> = ({name, width='100px', height='150px'}) => {
+const Card: React.FC<CardProps> = ({name, width=CARD_WIDTH, height=CARD_HEIGHT}) => {
     const [src, setSrc]= useState<StateSrc>(null);
     useEffect(() => {
         (async () => {
