@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import deckReducer from './deckSlice';
+import gameReducer from './gameSlice';
 
 const store = configureStore({
   reducer: {
-    deck: deckReducer
+    game: gameReducer
   },
 })
 export default store;
