@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Header from './components/Header';
 import Board from './components/Board';
 import InfoContainer from './components/InfoContainer';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { initDeck, initGame } from './redux/gameSlice';
-import { getDeck, initGame as initGameLogic } from './helpers/gameLogic';
+import { initGame } from './redux/gameSlice';
+import { initGame as initGameLogic } from './helpers/gameLogic';
 
 const Container = styled.div`
-  padding: 0 15px;
-`;
-
-
-const BodyContainer = styled.div`
+  height: 100vh;
   display: flex;
-  
+  padding: 0 15px;
 `;
 
 const App: React.FC = function() {
@@ -27,11 +22,8 @@ const App: React.FC = function() {
   }, [])
   
   return <Container>
-            <Header />
-            <BodyContainer>
-              <Board />
-              <InfoContainer />
-            </BodyContainer>
+            <Board />
+            <InfoContainer />
           </Container>
 }
 

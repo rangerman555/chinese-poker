@@ -1,7 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export interface CardType {
+    name: string;
+    suit: string;
+    value: number;
+}
+
 export interface HandType {
-    cards: string[];
+    cards: CardType[];
     score: number;
 }
 
@@ -10,7 +16,7 @@ export interface PlayerType {
 }
 
 export interface GameType {
-    deck: string[];
+    deck: CardType[];
     players: {[id: string]: PlayerType}
 }
 
@@ -23,7 +29,7 @@ const gameSlice = createSlice({
     name: 'game',
     initialState,
     reducers: {
-        initDeck: (state, action: PayloadAction<string[]>) => {
+        initDeck: (state, action: PayloadAction<CardType[]>) => {
             state.deck = action.payload;
         },
         initGame: (state, action: PayloadAction<GameType>) => {

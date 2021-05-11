@@ -8,6 +8,11 @@ interface Props {
 }
 
 const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;;
+    height: 100%;
 `;
 
 const Separator = styled.div`
@@ -21,9 +26,9 @@ const Separator = styled.div`
 const Board: React.FC<Props> = props => {
     return (
         <Container>
-            <HandList reverse={true}/>
+            <HandList reverse={true} playerId={'1'}/>
                 <Separator />
-            <HandList reverse={false} />
+            <HandList reverse={false} playerId={'0'}/>
         </Container>
     );
 }

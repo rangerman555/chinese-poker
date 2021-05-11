@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import HandColumn from './HandColumn';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { CardType } from '../redux/gameSlice';
 
 const Container = styled.div`
     display: flex;
@@ -12,15 +14,18 @@ const HandContainer = styled.div<{index: number}>`
 
 interface HandListProps {
     reverse: boolean;
+    playerId: string;
 }
 
 const HandList: React.FC<HandListProps> = props => {
-    
+    const players = useAppSelector(state => state.game.players[props.playerId]);
+    if (!players) return null;
+    const hands = players.hands;
     return (
         <Container>
-            {[0, 1, 2, 3, 4].map(key => {
-                return <HandContainer index={key}>
-                    <HandColumn key={key} reverse={props.reverse} />        
+            {hands.map((hand, index) => {
+                return <HandContainer key={index} index={index}>
+                    <HandColumn reverse={props.reverse} cards={hand.cards}/>        
                 </HandContainer>
                 }
             )}

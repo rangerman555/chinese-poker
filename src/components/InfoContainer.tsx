@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from './Card';
+import Deck from './Deck';
+
 
 interface InfoContainerProps {
 
@@ -22,7 +23,7 @@ const InfoContainer: React.FC<InfoContainerProps> = props => {
     return (
         <Container>
             <DeckContainer>
-                <Card name={'1B'}/>
+                <Deck />
             </DeckContainer>
         </Container>
     );

@@ -1,4 +1,5 @@
-import { HandType, GameType } from '../redux/gameSlice';
+import { HandType, GameType, CardType } from '../redux/gameSlice';
+
 
 export const initGame: () => GameType = () => {
     const deck = getDeck();
@@ -16,7 +17,7 @@ export const initGame: () => GameType = () => {
     }
 }
 
-export const initHands = (deck: string[]) => {
+export const initHands = (deck: CardType[]) => {
     const hands0: HandType[] = [];
     const hands1: HandType[] = [];
     for (let i = 0; i < 5; i++) {
@@ -29,10 +30,26 @@ export const initHands = (deck: string[]) => {
 
 
 export const getDeck = () => {
-    const cardsByName: string[] = [];
+    const cardsByName: CardType[] = [];
     const baseCards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A' ]
     baseCards.forEach(c => {
-        cardsByName.push(`${c}C`, `${c}D`, `${c}H`, `${c}S`)
+        cardsByName.push({
+            name: `${c}C`,
+            suit: 'clubs',
+            value: 0,
+        }, {
+            name: `${c}D`,
+            suit: 'diamond',
+            value: 0
+        },{
+            name: `${c}H`,
+            suit: 'clubs',
+            value: 0,
+        }, {
+            name: `${c}S`,
+            suit: 'diamond',
+            value: 0
+        })
     })
     return cardsByName;
 }

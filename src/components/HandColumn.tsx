@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 import {CARD_MARGIN} from '../constants';
+import { CardType } from '../redux/gameSlice';
 
 interface ReverseType {
     reverse: boolean;
@@ -19,20 +20,22 @@ const CardContainer = styled.div<ReverseType>`
 
 interface HandColumnsProps {
     reverse: boolean;
+    cards: CardType[];
+    
 }
 
 const HandColumns: React.FC<HandColumnsProps> = props => {
     
-    const cardsNames = ['2D', '5H', '3D', '8S', '6C'];
+    if (!props.cards) return null;
     
     return (
         <Container reverse={props.reverse}>
-            {cardsNames.map((name, index) => {
+            {props.cards.map((card, index) => {
                 if (index === 0) {
-                    return <Card key={name} name={name} />
+                    return <Card key={card.name} card={card} />
                 }
-                return <CardContainer reverse={props.reverse}>
-                            <Card key={name} name={name} />
+                return <CardContainer key={card.name} reverse={props.reverse}>
+                            <Card card={card} />
                         </CardContainer>
             }
         )}
