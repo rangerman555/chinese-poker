@@ -13,14 +13,13 @@ type StateSrc = string | null;
 
 const Card: React.FC<CardProps> = ({card={}, width=CARD_WIDTH, height=CARD_HEIGHT}) => {
     const [src, setSrc]= useState<StateSrc>(null);
-    console.log('ss', card)
     
     useEffect(() => {
         
         (async () => {
             if (!card) return;
             try {
-                const { default: namedImport } = await import(`../assets/cards/${card.name}.svg`);
+                const { default: namedImport } = await import(`../assets/cards/${card.open ? card.name : '1B'}.svg`);
                 setSrc(namedImport);
             } catch (err) {
                 throw err;

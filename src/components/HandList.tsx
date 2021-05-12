@@ -18,14 +18,19 @@ interface HandListProps {
 }
 
 const HandList: React.FC<HandListProps> = props => {
-    const players = useAppSelector(state => state.game.players[props.playerId]);
-    if (!players) return null;
-    const hands = players.hands;
+    const player = useAppSelector(state => state.game.players[props.playerId]);
+    if (!player) return null;
+    const hands = player.hands;
     return (
         <Container>
             {hands.map((hand, index) => {
                 return <HandContainer key={index} index={index}>
-                    <HandColumn reverse={props.reverse} cards={hand.cards}/>        
+                    <HandColumn 
+                        reverse={props.reverse} 
+                        cards={hand.cards} 
+                        playerId={props.playerId}
+                        handId={index}
+                    />        
                 </HandContainer>
                 }
             )}

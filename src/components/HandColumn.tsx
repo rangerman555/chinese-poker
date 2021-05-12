@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Card from './Card';
 import styled from 'styled-components';
 import {CARD_MARGIN} from '../constants';
-import { CardType } from '../redux/gameSlice';
+import { CardType, addCard } from '../redux/gameSlice';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { getCardFromDeck } from '../helpers/gameLogic';
 
 interface ReverseType {
     reverse: boolean;
@@ -11,6 +13,7 @@ interface ReverseType {
 const Container = styled.div<ReverseType>`
     display: flex;
     flex-direction: ${props => props.reverse ? 'column-reverse' : 'column'};
+    height: 300px;
 `;
 
 const CardContainer = styled.div<ReverseType>`
@@ -21,15 +24,28 @@ const CardContainer = styled.div<ReverseType>`
 interface HandColumnsProps {
     reverse: boolean;
     cards: CardType[];
-    
+    playerId: string;
+    handId: number;
 }
 
 const HandColumns: React.FC<HandColumnsProps> = props => {
-    
+    const dispatch = useAppDispatch();
+
     if (!props.cards) return null;
+
+    const takeCardHandler = () => {
+        dispatch(addCard({
+            playerId: props.playerId, 
+            handId: props.handId, 
+            card: getCardFromDeck()
+        }))
+    }
     
     return (
-        <Container reverse={props.reverse}>
+        <Container 
+            reverse={props.reverse}
+            onClick={takeCardHandler}
+        >
             {props.cards.map((card, index) => {
                 if (index === 0) {
                     return <Card key={card.name} card={card} />

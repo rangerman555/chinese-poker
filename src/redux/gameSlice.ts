@@ -4,6 +4,7 @@ export interface CardType {
     name: string;
     suit: string;
     value: number;
+    open: boolean;
 }
 
 export interface HandType {
@@ -35,10 +36,16 @@ const gameSlice = createSlice({
         initGame: (state, action: PayloadAction<GameType>) => {
             state.deck = action.payload.deck;
             state.players = action.payload.players;
+        },
+        addCard: (state, action: PayloadAction<{playerId: string, handId: number, card: CardType}>) => {
+            const { playerId, handId, card } = action.payload;
+            if (state.players[playerId].hands[handId].cards.length < 5) {
+                state.players[playerId].hands[handId].cards.push(card);
+            }
         }
     }
 })
 
-export const { initDeck, initGame } = gameSlice.actions;
+export const { initDeck, initGame, addCard } = gameSlice.actions;
 
 export default gameSlice.reducer;

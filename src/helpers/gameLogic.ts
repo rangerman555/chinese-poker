@@ -37,19 +37,32 @@ export const getDeck = () => {
             name: `${c}C`,
             suit: 'clubs',
             value: 0,
+            open: true
         }, {
             name: `${c}D`,
             suit: 'diamond',
-            value: 0
+            value: 0,
+            open: true
         },{
             name: `${c}H`,
             suit: 'clubs',
             value: 0,
+            open: true
         }, {
             name: `${c}S`,
             suit: 'diamond',
-            value: 0
+            value: 0,
+            open: true
         })
     })
     return cardsByName;
+}
+
+export const getCardFromDeck = () => {
+    return {
+        name: `5S`,
+        suit: 'diamond',
+        value: 0,
+        open: true
+    }
 }

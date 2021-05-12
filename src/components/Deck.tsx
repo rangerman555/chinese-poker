@@ -16,7 +16,7 @@ const Container = styled.div`
 const Deck: React.FC<DeckProps> = props => {
     return (
         <Container>
-            <Card card={{name: '1B', suit: '', value: 0}}/>
+            <Card card={{name: '1B', suit: '', value: 0, open: true}}/>
         </Container>
     );
 }
