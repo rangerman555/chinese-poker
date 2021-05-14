@@ -19,11 +19,13 @@ export interface PlayerType {
 export interface GameType {
     deck: CardType[];
     players: {[id: string]: PlayerType}
+    isActive?: boolean;
 }
 
 const initialState: GameType = {
     deck: [],
-    players: {}
+    players: {},
+    isActive: false
 }
 
 const gameSlice = createSlice({
@@ -42,10 +44,22 @@ const gameSlice = createSlice({
             if (state.players[playerId].hands[handId].cards.length < 5) {
                 state.players[playerId].hands[handId].cards.push(card);
             }
+        },
+        startGame: (state) => {
+            state.isActive = true;
+        },
+        endGame: (state) => {
+            state.isActive = false;
         }
     }
 })
 
-export const { initDeck, initGame, addCard } = gameSlice.actions;
+export const { 
+    initDeck, 
+    initGame, 
+    addCard, 
+    startGame, 
+    endGame 
+} = gameSlice.actions;
 
 export default gameSlice.reducer;

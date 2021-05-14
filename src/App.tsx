@@ -10,6 +10,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   padding: 0 15px;
+  background-color: green;
 `;
 
 const App: React.FC = function() {

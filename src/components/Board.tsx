@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import HandList from './HandList';
 import { BOARD_SEPARATOR_wIDTH } from '../constants';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { startGame } from '../redux/gameSlice';
 
 interface Props {
     
@@ -24,11 +26,30 @@ const Separator = styled.div`
 `;
 
 const Board: React.FC<Props> = props => {
+    const isGameActive = useAppSelector(state => state.game.isActive);
+    const dispatch = useAppDispatch();
+
+    const renderStartGameButton = () => {
+        return (
+            <button onClick={() => dispatch(startGame())}>Start Game</button>
+        );
+    }
+
+    const renderCards = () => {
+        return (
+            <React.Fragment>
+                <HandList reverse={true} playerId={'1'}/>
+                    <Separator />
+                <HandList reverse={false} playerId={'0'}/>
+            </React.Fragment>
+        );
+    }
     return (
         <Container>
-            <HandList reverse={true} playerId={'1'}/>
-                <Separator />
-            <HandList reverse={false} playerId={'0'}/>
+            {isGameActive ? 
+                renderCards():
+                renderStartGameButton()
+            }
         </Container>
     );
 }
